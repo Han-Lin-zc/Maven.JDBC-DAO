@@ -2,16 +2,16 @@ package daos;
 
 public class CarDTO implements DTO{
 
-    private Integer id;
+    private int id;
     private String name;
     private String model;
-    private Integer year;
+    private int year;
     private String color;
-    private Integer Vin;
+    private int Vin;
 
     public CarDTO() {}
 
-    public CarDTO(String name, String model, Integer year, String color, Integer vin) {
+    public CarDTO(String name, String model, int year, String color, int vin) {
         this.name = name;
         this.model = model;
         this.year = year;
@@ -19,7 +19,7 @@ public class CarDTO implements DTO{
         Vin = vin;
     }
 
-    public CarDTO(Integer id, String name, String model, Integer year, String color, Integer vin) {
+    public CarDTO(int id, String name, String model, int year, String color, int vin) {
         this.id = id;
         this.name = name;
         this.model = model;
@@ -28,11 +28,11 @@ public class CarDTO implements DTO{
         Vin = vin;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -52,11 +52,11 @@ public class CarDTO implements DTO{
         this.model = model;
     }
 
-    public Integer getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
@@ -68,11 +68,11 @@ public class CarDTO implements DTO{
         this.color = color;
     }
 
-    public Integer getVin() {
+    public int getVin() {
         return Vin;
     }
 
-    public void setVin(Integer vin) {
+    public void setVin(int vin) {
         Vin = vin;
     }
 

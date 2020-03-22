@@ -10,7 +10,6 @@ public class CarDAO implements DAO{
     public CarDTO extractCarFromResultSet(ResultSet rs) throws SQLException
     {
         CarDTO carDTO = new CarDTO();
-
         carDTO.setId( rs.getInt("id"));
         carDTO.setName( rs.getString("name"));
         carDTO.setModel( rs.getString("model"));
@@ -20,10 +19,10 @@ public class CarDAO implements DAO{
         return carDTO;
     }
 
-    public CarDTO findById(Integer id) {
+    public CarDTO findById(int id) {
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM car WHERE id = " + id);
+            ResultSet rs = statement.executeQuery("SELECT * FROM Cars WHERE id=" + id);
             if (rs.next()) {
                 return extractCarFromResultSet(rs);
             }
@@ -38,7 +37,7 @@ public class CarDAO implements DAO{
         List<CarDTO> cars = new ArrayList<CarDTO>();
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM car");
+            ResultSet rs = statement.executeQuery("SELECT * FROM Cars");
             while (rs.next()) {
                 CarDTO carDTO = extractCarFromResultSet(rs);
                 cars.add(carDTO);
@@ -52,7 +51,7 @@ public class CarDAO implements DAO{
     public boolean update(CarDTO dto) {
         try {
             PreparedStatement ps = connection.prepareStatement(
-                    "UPDATE car SET name=?, model=?, year=?, color=?, vin=? WHERE id=" + dto.getId() + ";");
+                    "UPDATE Cars SET name=?, model=?, year=?, color=?, vin=? WHERE id=" + dto.getId() + ";");
             ps.setString(1, dto.getName());
             ps.setString(2, dto.getModel());
             ps.setInt(3, dto.getYear());
@@ -68,20 +67,16 @@ public class CarDAO implements DAO{
         return false;
     }
 
-    private static final String INSERT = "INSERT INTO car" +
-            "(id, name, model, year, color, vin" +
-            "values(?,?,?,?,?,?);";
-
 
     public boolean create(CarDTO dto) {
         try {
-            PreparedStatement ps = connection.prepareStatement(INSERT);
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO cars VALUES (?,?,?,?,?,?);");
             ps.setInt(1, dto.getId());
-            ps.setString(1, dto.getName());
-            ps.setString(1, dto.getModel());
-            ps.setInt(1, dto.getYear());
-            ps.setString(1, dto.getColor());
-            ps.setInt(1, dto.getVin());
+            ps.setString(2, dto.getName());
+            ps.setString(3, dto.getModel());
+            ps.setInt(4, dto.getYear());
+            ps.setString(5, dto.getColor());
+            ps.setInt(6, dto.getVin());
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -89,10 +84,10 @@ public class CarDAO implements DAO{
         return false;
     }
 
-    public boolean delete(Integer id) {
+    public boolean delete(int id) {
         try {
             Statement statement = connection.createStatement();
-            int i = statement.executeUpdate("DELETE FROM car WHERE id=" + id);
+            int i = statement.executeUpdate("DELETE FROM Cars WHERE id=" + id);
 
             if (i == 1) return true;
 

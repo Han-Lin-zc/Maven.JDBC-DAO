@@ -19,11 +19,12 @@ public class ConnectionFactory {
 
     public static Connection getConnection() {
         try {
-            DriverManager.registerDriver(new Driver());
+            //DriverManager.registerDriver(new Driver());
+            Class.forName("com.mysql.cj.jdbc.Driver");
             LOGGER.log(Level.INFO, "It works!");
             return DriverManager.getConnection(URL, USER, PASS);
-        } catch (SQLException e) {
-            LOGGER.info("NOT WORKING " + e);
+        } catch (SQLException | ClassNotFoundException e) {
+            LOGGER.info("NOT WORKING" + e);
             throw new RuntimeException("Error connecting to the database", e);
         }
     }
