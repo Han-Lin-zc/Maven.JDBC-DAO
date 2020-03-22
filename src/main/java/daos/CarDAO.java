@@ -19,6 +19,7 @@ public class CarDAO implements DAO{
         return carDTO;
     }
 
+
     public CarDTO findById(int id) {
         try {
             Statement statement = connection.createStatement();
@@ -31,6 +32,7 @@ public class CarDAO implements DAO{
         }
         return null;
     }
+
 
     public List<CarDTO> findAllCar() {
 
@@ -77,7 +79,10 @@ public class CarDAO implements DAO{
             ps.setInt(4, dto.getYear());
             ps.setString(5, dto.getColor());
             ps.setInt(6, dto.getVin());
-
+            int i = ps.executeUpdate();
+            if (i == 1) {
+                return true;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -13,6 +13,7 @@ public class CarDAOTest {
     CarDAO car = new CarDAO();
 
     CarDTO carDTO = new CarDTO(12, "86", "GT", 2020, "black", 102193);
+    CarDTO carDTO2 = new CarDTO(1, "Civic", "Accord", 2016, "red", 112233);
 
 
     @Test
@@ -23,19 +24,19 @@ public class CarDAOTest {
 
     @Test
     public void findByIdTest() {
-        car.create(carDTO);
-        CarDTO newCar = car.findById(12);
-        Assert.assertEquals("86", newCar.getName());
-        Assert.assertEquals("GT", newCar.getModel());
-        Assert.assertEquals(2020 , newCar.getYear());
-        Assert.assertEquals("black", newCar.getColor());
-        Assert.assertEquals(102193, newCar.getVin());
+        car.create(carDTO2);
+        CarDTO newCar = car.findById(1);
+        Assert.assertEquals("Civic", newCar.getName());
+        Assert.assertEquals("Accord", newCar.getModel());
+        Assert.assertEquals(2016, newCar.getYear());
+        Assert.assertEquals("red", newCar.getColor());
+        Assert.assertEquals(112233, newCar.getVin());
     }
 
     @Test
     public void findAllCarTest() {
         List<CarDTO> list = car.findAllCar();
-        Integer expectedSize = 5;
+        Integer expectedSize = 2;
         Integer actualSize = list.size();
         Assert.assertEquals(expectedSize, actualSize);
     }
@@ -56,10 +57,8 @@ public class CarDAOTest {
 
     @Test
     public void createTest() {
-        car.create(carDTO);
-        CarDTO expected = new CarDTO(12, "Civic", "SI", 2020, "red", 932110);
-        car.create(expected);
-        assertEquals(12, carDTO.getId());
+        assertTrue(car.create(carDTO));
+        car.delete(12);
     }
 
     @Test
